@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://tradelify:8GOLhFYQeNdHqmNE@cluster0.2ldepej.mongodb.net/tradelify?appName=Cluster0";
+const MONGODB_URI = process.env.MONGODB_URI || "your_mongodb_uri_here";
 
 const UserSchema = new mongoose.Schema(
   {
