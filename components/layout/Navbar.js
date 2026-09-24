@@ -3,10 +3,12 @@
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
+import { useCartCount } from "@/hooks/useCartCount";
 
 export default function Navbar() {
   const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
+  const cartCount = useCartCount();
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -32,11 +34,13 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {/* Cart */}
           <Link href="/cart" className="relative">
-            <span className="text-2xl">🛒</span>
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-              0
-            </span>
-          </Link>
+  <span className="text-2xl">🛒</span>
+  {cartCount > 0 && (
+    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+      {cartCount > 99 ? "99+" : cartCount}
+    </span>
+  )}
+</Link>
 
           {/* Auth */}
           {session ? (

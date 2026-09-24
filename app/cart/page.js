@@ -12,19 +12,21 @@ export default function CartPage() {
     setCart(savedCart);
   }, []);
 
-  const updateQuantity = (id, quantity) => {
+ const updateQuantity = (id, quantity) => {
     if (quantity < 1) return;
     const updatedCart = cart.map((item) =>
       item._id === id ? { ...item, quantity } : item
     );
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    window.dispatchEvent(new Event("cartUpdated"));
   };
 
   const removeItem = (id) => {
     const updatedCart = cart.filter((item) => item._id !== id);
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    window.dispatchEvent(new Event("cartUpdated"));
   };
 
   const totalPrice = cart.reduce(
